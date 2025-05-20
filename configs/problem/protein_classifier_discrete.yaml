@@ -1,0 +1,35 @@
+name: protein_classifier_discrete
+sample_batch_size: 200 #batch size for inference
+
+train:
+  batch_size: 64 #batch size for training
+  n_epochs: 1000 #made this much higher based on findings from the oracle
+  n_epochs_no_time : 200 #number of epochs to train the model if training with only clean data (DAPS); this seems ok for now, but can train longer in the future
+
+  seed: 42
+  learning_rate: 1e-3
+  device: cuda
+  wandb: True
+
+#don't know if i understand this part
+# model:
+#   _target_: problem.basic.XOR
+#   ratio: 0.5
+data:
+  _target_: dataset.protein.ProteinPredictorDataset
+
+model:
+  _target_: problem.protein.ProteinPredictor
+  model_config:
+    hidden_dim: 64
+    checkpoint: None
+
+train_function:
+  _target_: training.train_classifier.train_classifier
+
+exp_dir: exps/protein
+
+# evaluator:
+#   _target_: eval.Evaluator
+#   residues: [183, 184, 227, 228]
+#   data_path: data/fitness.csv

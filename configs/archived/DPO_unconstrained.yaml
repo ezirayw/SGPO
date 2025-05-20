@@ -1,0 +1,5 @@
+name: DPO_unconstrained
+method:
+  _target_: sampling.DPO.DPOInpaint
+  temp: 1. #consider increasing temperature here for less repeats. Increasing actually has fewer?
+  top_p: 1.

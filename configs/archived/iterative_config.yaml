@@ -1,0 +1,16 @@
+exp_name: iterative #alignment_1000 #change this to save results in a different directory
+measurement: False
+num_samples: 200 #number of samples per round
+random_init: False
+BO: False #whether to use sample acquisition like Bayesian optimization. If using BO, set to True and does not acquire new sequences that have been previously sampled. 
+
+# save_dir: checkpoints/classifiers
+seed: 42
+num_rounds: 1
+pretrained_ckpt: mdlm/TrpB
+
+defaults:
+  - data: TrpB
+  - model: mdlm
+  - problem: protein_classifier
+  - algorithm: cls_guidance_d3pm

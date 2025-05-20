@@ -1,0 +1,5 @@
+name: uncond
+method:
+  _target_: sampling.uncond.Uncond
+  temp: 1. #only for language model
+  top_p: 1. #only for language model

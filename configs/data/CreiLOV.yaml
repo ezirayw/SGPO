@@ -1,0 +1,12 @@
+name: CreiLOV
+data_path: data/CreiLOV/fitness.csv
+pretrain_data_prefix: data/CreiLOV/ #the start of the file name for pretraining data
+full_seq: MAGLRHTFVVADATLPDCPLVYASEGFYAMTGYGPDEVLGHNARFLQGEGTDPKEVQKIRDAIKKGEACSVRLLNYRKDGTPFWNLLTVTPIKTPDGRVSKFVGVQVDVTSKTEGKALA
+seq_len: 119
+residues: #mutated positions, this uses 1 indexing, if None, then use all residues
+seed: 42
+# alphabet: 'ACDEFGHIKLMNPQRSTVWYBZXJOU'
+# alphabet_size: 26 #don't hardcode this in the future
+alphabet: 'ACDEFGHIKLMNPQRSTVWYBZXJOU-*#@!'
+alphabet_size: 31 #don't hardcode this in the future
+oracle_model_path: oracle/checkpoints/CreiLOV

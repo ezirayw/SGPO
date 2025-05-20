@@ -1,0 +1,19 @@
+exp_name: pareto #alignment_1000 #change this to save results in a different directory
+measurement: False
+batch_size: 200 #batch size for initial unconditional sampling
+num_steer: 200 #number of samples to steer the model with
+num_samples: 200 #number of samples to generate for statistics
+random_init: False
+BO: False #whether to use sample acquisition like Bayesian optimization. If using BO, set to True and does not acquire new sequences that have been previously sampled. 
+unique_only: False #whether to only acquire unique sequences
+
+# save_dir: checkpoints/classifiers
+n_repeats: 10
+seed: 42
+pretrained_ckpt: d3pm_finetune/TrpB
+
+defaults:
+  - data: TrpB
+  - model: d3pm
+  - problem: protein_classifier_discrete
+  - algorithm: cls_guidance_discrete

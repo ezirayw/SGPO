@@ -1,0 +1,9 @@
+name: cls_guidance
+time_conditioned: True
+guidance_params: [0.0256, 0.064, 0.16, 0.4, 1.]
+
+method:
+  _target_: sampling.cls_guidance.Classifier_Guidance_Inpaint
+  temperature: 0.064 #this is the deafult "lambda" describing the inverse strength of guidance
+  n_max_mutations:
+    

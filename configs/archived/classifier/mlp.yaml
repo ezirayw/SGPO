@@ -1,0 +1,7 @@
+name: mlp_model
+model:
+  _target_: problem.protein.ProteinPredictor
+  predictor_config:
+    alphabet_size: 26
+    residues: [183, 184, 227, 228]
+    hidden_dim: 256

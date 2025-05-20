@@ -1,0 +1,28 @@
+name: protein_classifier_continuous
+sample_batch_size: 200  # batch size for inference
+
+train:
+  batch_size: 128        # batch size for training
+  n_epochs: 1000 #250      # number of epochs (you can adjust as needed)
+  seed: 42
+  learning_rate: 1e-3
+  device: cuda
+  wandb: True
+
+data:
+  _target_: dataset.protein.ProteinPredictorDataset
+  # (Optionally add extra parameters for your dataset if needed)
+
+model:
+  _target_: problem.protein_continuous.ProteinPredictorContinuous
+  model_config:
+    embed_dim: 128      # should match the diffusion model's embedding dimension (128 for normal and 480 for ESM embeddings) used to be 64
+    hidden_dim: 256     # hidden dimension for the MLP in the regressor, check this
+    #seq_length: 15      # fixed sequence length (e.g. 15 amino acids as in your CSV)
+    mean_pool: False     # whether to use mean pooling on the initial representation
+    checkpoint: None    # path to a checkpoint, if any
+
+train_function:
+  _target_: training.train_classifier_continuous.train_classifier
+  
+exp_dir: exps/protein

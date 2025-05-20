@@ -1,0 +1,11 @@
+name: cls_guidance_unconstrained
+guidance_params:
+  - 0.0001
+  - 0.001
+  - 0.01
+  - 0.1
+  - 1.
+method:
+  _target_: sampling.cls_guidance.Classifier_Guidance_Inpaint
+  temperature: 0.01 #this seems to be the "lambda" describing the inverse strength of guidance.
+    

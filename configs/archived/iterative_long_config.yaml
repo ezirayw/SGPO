@@ -1,0 +1,16 @@
+exp_name: iterative_long
+measurement: False
+num_samples: 100 #number of samples per round
+random_init: False
+BO: True #whether to use sample acquisition like Bayesian optimization. If using BO, set to True and does not acquire new sequences that have been previously sampled. 
+
+#save_dir: checkpoints/classifiers
+seed: 42
+num_rounds: 10
+pretrained_ckpt: d3pm_finetune/TrpB
+
+defaults:
+  - data: TrpB
+  - model: d3pm
+  - problem: protein_classifier
+  - algorithm: cls_guidance_d3pm

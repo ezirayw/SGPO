@@ -1,0 +1,15 @@
+name: DAPS_unconstrained
+guidance_params:
+  - 1.
+  - 10.
+  - 100.
+  - 1000.
+  - 10000.
+method:
+  _target_: sampling.daps.DAPS
+  num_steps: 500 #50
+  ode_steps: 20
+  mh_steps: 1000
+  alpha: 10
+  max_dist: 1
+  n_max_mutations:

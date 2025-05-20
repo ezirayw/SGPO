@@ -1,0 +1,5 @@
+name: evodiff-d3pm
+model:
+  _target_: models.d3pm.D3PM
+  model_name: d3pm_uniform_38m
+  seq_len: 389 #replace later

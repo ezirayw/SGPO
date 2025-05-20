@@ -1,0 +1,8 @@
+name: cls_guidance
+time_conditioned: True #classifier trained on noisy data
+guidance_params: [64., 128., 256., 512., 1024.] #[8., 32., 128., 512., 2048.] #[1., 8., 64., 512., 2048.] #4096  #[1., 10., 100., 1000., 10000.] 
+method:
+  _target_: sampling.cls_guidance.Classifier_Guidance_Continuous
+  temperature: 512. #1.0
+  n_max_mutations:
+    

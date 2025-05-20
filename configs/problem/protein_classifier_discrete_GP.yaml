@@ -1,0 +1,30 @@
+name: protein_classifier_discrete_GP
+sample_batch_size: 200 #batch size for inference
+
+train:
+  batch_size: 64 #only used in the dataloader, not the actual GP training
+  #n_epochs: 1000 #made this much higher based on findings from the oracle
+  seed: 42
+  max_samples: 5000
+  #learning_rate: 1e-3
+  #device: cuda
+  #wandb: True
+
+data:
+  _target_: dataset.protein.ProteinPredictorDataset
+
+model:
+  #hidden_dim: #for embedding to the same dimension
+  _target_: botorch.models.gp_regression.SingleTaskGP
+  #_partial_: true
+  # train_X:
+  # train_Y:
+  likelihood:
+    _target_: gpytorch.likelihoods.GaussianLikelihood
+
+exp_dir: exps/protein
+
+# evaluator:
+#   _target_: eval.Evaluator
+#   residues: [183, 184, 227, 228]
+#   data_path: data/fitness.csv

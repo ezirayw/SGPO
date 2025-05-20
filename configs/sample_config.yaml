@@ -1,0 +1,16 @@
+exp_name: uncond
+measurement: False
+num_samples: 1000 #1000
+batch_size: 200
+num_samples_per_round: 100 #100 #number of samples per round
+n_repeats: 5
+n_rounds: 8
+seed: 42
+wandb: False
+pretrained_ckpt: d3pm_finetune/TrpB #continuous/TrpB
+
+defaults:
+  - data: TrpB
+  - model: d3pm
+  #- problem: protein_classifier_discrete
+  #- algorithm: cls_guidance_discrete

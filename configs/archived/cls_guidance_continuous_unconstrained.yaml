@@ -1,0 +1,11 @@
+name: cls_guidance_unconstrained
+guidance_params:
+  - 1.
+  - 10.
+  - 100.
+  - 1000.
+  - 10000.
+method:
+  _target_: sampling.cls_guidance.Classifier_Guidance_Continuous
+  temperature: 100.
+  n_max_mutations:

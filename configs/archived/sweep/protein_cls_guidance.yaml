@@ -1,0 +1,23 @@
+program: main.py
+project: protein_guidance
+name: classifier_guidance
+method: bayes
+metric:
+  goal: maximize
+  name: fitness
+parameters:
+  algorithm.method.temperature:
+    distribution: q_log_uniform_values
+    min: 0.01
+    max: 100
+    q: 0.1
+
+command:
+  - ${env}
+  - python
+  - ${program}
+  - problem=protein_classifier                 
+  - algorithm=cls_guidance                     
+  - model=evodiff_d3pm                         
+  - wandb=True
+  - ${args_no_hyphens}
