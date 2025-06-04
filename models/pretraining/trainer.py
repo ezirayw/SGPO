@@ -19,10 +19,10 @@ class BaseModel(pl.LightningModule):
         self.train_epoch_counter = 0
         self.train_epoch_last_time = time.time()
 
-    def training_step(self, batch):        
+    def training_step(self, batch):
         out = self.forward(batch
             #labels=batch["labels"] if "labels" in batch else None,
-        )        
+        )
 
         log_dict = {f"train_{k}" : v for k, v in out.items()}
         self.log_dict(log_dict)  # Don't seem to need rank zero or sync dist
@@ -32,15 +32,15 @@ class BaseModel(pl.LightningModule):
         #         out["loss"] = out["loss"] + out["regression_mse"]
         #     elif batch_idx % self.discr_batch_ratio == 0:
         #         out["loss"] = out["regression_mse"]
-        
+
         return out["loss"]
 
-    def validation_step(self, batch):
+    def validation_step(self, batch, batch_idx):
         with torch.no_grad():
             out = self.forward(batch
                 #labels=batch["labels"] if "labels" in batch else None,
             )
-                
+
         log_dict = {f"val_{k}" : v for k, v in out.items()}
         self.log_dict(log_dict, rank_zero_only=True)
 
@@ -61,14 +61,14 @@ class BaseModel(pl.LightningModule):
             }
 
         return config
-    
+
 def get_trainer(config):
     save_path = os.path.join("checkpoints", config.pretrain_model.name, config.data.name)
 
     if "causalLM" in config.pretrain_model.name:
         hf_callback = HuggingFaceCheckpointer(
             save_dir=os.path.join(save_path), #"huggingface"
-            #tokenizer=None, 
+            #tokenizer=None,
             save_every_n_epochs=1  # Save every epoch
         )
         callbacks = [hf_callback]
@@ -78,7 +78,7 @@ def get_trainer(config):
     else:
         checkpoint_callback = ModelCheckpoint(dirpath=save_path, filename="best_model", monitor="val_loss", mode="min", save_top_k=1) #only keep the model with the lowest validation loss
         callbacks = [checkpoint_callback]
-    
+
     experiment_name = config.exp_name + "-" + config.pretrain_model.name + "-" + config.data.name
     wandb_logger = WandbLogger(experiment_name, project=config.wandb_project) #dir=config.exp_name
 
